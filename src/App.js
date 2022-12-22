@@ -34,14 +34,12 @@ function App() {
   };
   return (
     <>
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggelMode} />
-      <Alert alert={alert} />
-      <Router>
-        <div className="container my-3">
+        <Router>
+          <Navbar title="TextUtils" mode={mode} toggleMode={toggelMode} />
+          <Alert alert={alert} />
+            <div className="container my-3">
           <Routes>
-            <Route excat path="/about" element={<About mode={mode} />} />
             <Route
-              exact
               path="/TextUtils"
               element={
                 <TextForm
@@ -50,10 +48,11 @@ function App() {
                   mode={mode}
                 />
               }
-            />
+              />
+            <Route path="/about" element={<About mode={mode} />} />
           </Routes>
-        </div>
-      </Router>
+              </div>
+        </Router>
     </>
   );
 }

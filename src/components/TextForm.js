@@ -37,6 +37,7 @@ export default function TextForm(props) {
     let myText = document.getElementById("myBox");
     myText.select();
     navigator.clipboard.writeText(myText.value);
+    document.getSelection().removeAllRanges()
     props.showAlert("Copied text", "success");
   };
 
@@ -70,31 +71,46 @@ export default function TextForm(props) {
           ></textarea>
         </div>
         <div className="container ">
-          <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary mx-1 my-1"
+            onClick={handleUpClick}
+          >
             Convert to UPPERCASE
           </button>
           <button
+            disabled={text.length === 0}
             className="btn btn-primary mx-1 my-1"
             onClick={handleLowClick}
           >
             Convert to lowercase
           </button>
           <button
+            disabled={text.length === 0}
             className="btn btn-primary mx-1 my-1"
             onClick={handleClearClick}
           >
             Clear Text
           </button>
           <button
+            disabled={text.length === 0}
             className="btn btn-primary mx-1 my-1"
             onClick={handleCamClick}
           >
             Convert to camelCase
           </button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleCopy}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary mx-1 my-1"
+            onClick={handleCopy}
+          >
             Copy Text
           </button>
-          <button className="btn btn-primary mx-1 my-1" onClick={handleSpaces}>
+          <button
+            disabled={text.length === 0}
+            className="btn btn-primary mx-1 my-1"
+            onClick={handleSpaces}
+          >
             Remove Extra Spaces
           </button>
         </div>
@@ -104,14 +120,19 @@ export default function TextForm(props) {
           <p>
             {text === "" || text.split(/[ ]+/).join(" ") === " "
               ? 0
-              : text.split(" ").length}{" "}
+              : text.split(" ").filter((element) => {
+                  return element.length !== 0;
+                }).length}
             Words and {text.split(/[ ]+/).join(" ") === " " ? 0 : text.length}{" "}
             characters
           </p>
           <p>
             {text === "" || text.split(/[ ]+/).join(" ") === " "
               ? 0
-              : 0.008 * text.split(" ").length}{" "}
+              : 0.008 *
+                text.split(" ").filter((element) => {
+                  return element.length !== 0;
+                }).length}
             Minutes read
           </p>
           <h2>Text Preview</h2>
@@ -120,7 +141,7 @@ export default function TextForm(props) {
               ? " "
               : text.length > 0
               ? text
-              : "Enter something in the text box above to preview it here"}
+              : "Nothing to preview"}
           </p>
         </div>
       </div>
