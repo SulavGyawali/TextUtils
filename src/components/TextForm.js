@@ -119,7 +119,7 @@ export default function TextForm(props) {
               text.split(/\s+/).filter((element) => {
                 return element.length !== 0;
               }).length
-            }
+            } {' '}
             Words and {text.split(/[ ]+/).join(" ") === " " ? 0 : text.length}{" "}
             characters
           </p>
@@ -127,7 +127,7 @@ export default function TextForm(props) {
             {0.008 *
               text.split(/\s+/).filter((element) => {
                 return element.length !== 0;
-              }).length}
+              }).length} {' '}
             Minutes read
           </p>
           <h2>Text Preview</h2>
